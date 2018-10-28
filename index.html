@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>D3 Test</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    .div1, .div2, .div3 {
+      width: 200px;
+      height: 200px;
+      border: 1px solid skyblue;
+    }
+    .div1 > p {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="div1">
+    <p>text 1</p>
+    <p>text 2</p>
+    <p>text 3</p>
+
+    <p class="random">random color</p>
+    <p class="random">random color</p>
+    <p class="random">random color</p>
+  </div>
+
+  <div class="div2">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+  </div>
+
+  <div class="div3">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>3</div>
+    <div>3</div>
+    <div>3</div>
+  </div>
+
+  <script>
+    d3.selectAll('p').style('color', 'red');
+
+    // random color
+    d3.selectAll('.random').style('color', function() {
+      return `hsl(${Math.random() * 360}, 100%, 50%)`;
+    });
+
+    // select odd
+    d3.selectAll('p').style('background-color', function(d, i) {
+      return i % 2 ? '#fff' : '#eee';
+    });
+
+    // bound data
+    d3.selectAll('p')
+      .data([8, 9, 10, 11, 12, 13])
+        .style('font-size', function(d) {
+          return `${d + 1}px`;
+        });
+
+    // Enter and Exit
+    d3.select('.div2')
+      .selectAll('div')
+      .data([4, 8, 15, 16, 23, 42])
+      .enter().append('div')
+        .text(function(d) {
+          return `I'm number ${d} !`;
+        });
+
+    // Update
+    var p = d3.select('.div3')
+        .selectAll('div')
+        .data([4, 8, 15, 16, 23, 42])
+          .text(d => d);
+
+    p.enter().append('div')
+        .text(d => d);
+    
+    p.exit().remove();
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "d3-test",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "YOUNGmaxer <517538470@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
